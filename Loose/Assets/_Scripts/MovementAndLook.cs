@@ -8,6 +8,9 @@ public class MovementAndLook : MonoBehaviour {
 
     public float lookSensitivity;
     public float moveSpeed;
+    public float normalMoveSpeed;
+    public float sprintingSpeed;
+    
     public float gravity;
 
 
@@ -19,19 +22,38 @@ public class MovementAndLook : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            moveSpeed = sprintingSpeed;
+        }
+        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            moveSpeed = normalMoveSpeed;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            this.GetComponent<Rigidbody>().AddForce(0, 500, 0);
+        }
         look();
-        move();
 
+
+
+
+    }
+    private void FixedUpdate()
+    {
+        move();
     }
 
     void move()
     {
-        Vector3 moveDir = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        Vector3 moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         moveDir = transform.TransformDirection(moveDir);
-        moveDir *= moveSpeed * Time.deltaTime * 10;
-        //Debug.Log(moveDir);
+        moveDir *= moveSpeed * Time.deltaTime * 14;
 
-        this.gameObject.GetComponent<Rigidbody>().MovePosition(this.gameObject.transform.position + moveDir);
+        this.GetComponent<Rigidbody>().AddForce(moveDir, ForceMode.VelocityChange);
+
+        //this.gameObject.GetComponent<Rigidbody>().MovePosition(this.gameObject.transform.position + moveDir);
     }
 
     void look()

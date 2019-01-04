@@ -20,6 +20,7 @@ public class Ammo : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         //if opposite faction, deal damage
+        Debug.Log("HIT : " + collision.gameObject);
         DamageableEntity colEntity = collision.gameObject.GetComponent<DamageableEntity>();
         if (colEntity != null && colEntity.friendlyToPlayer != friendlyToPlayer)
         {

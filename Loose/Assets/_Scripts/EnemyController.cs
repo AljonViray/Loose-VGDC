@@ -25,8 +25,8 @@ public class EnemyController : MonoBehaviour {
 
         GameObject newSiegeTower = GameObject.Instantiate(siegeTowerPrefab, spawnLocation, Quaternion.identity);
         newSiegeTower.transform.rotation = Quaternion.Slerp(newSiegeTower.transform.rotation
-            , Quaternion.LookRotation(new Vector3(0, 20, 0) - newSiegeTower.transform.position), 1f);
-        newSiegeTower.transform.Translate(0, 20, 0);
+            , Quaternion.LookRotation(new Vector3(0,0, 0) - newSiegeTower.transform.position), 1f);
+        newSiegeTower.transform.Translate(0, 0, 0);
 
     }
 }

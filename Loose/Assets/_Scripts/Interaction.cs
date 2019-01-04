@@ -19,6 +19,31 @@ public class Interaction : MonoBehaviour {
 	void Update () {
         lookingAtObject = closestObject(3);
 
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            GameObject newPC;
+            if(this.gameObject.name == "Player")
+            {
+                newPC = GameObject.Find("Scout");
+            }
+            else
+            {
+                newPC = GameObject.Find("Player");
+            }
+
+            this.gameObject.GetComponent<MovementAndLook>().enabled = false;
+            newPC.GetComponent<MovementAndLook>().enabled = true;
+
+            this.gameObject.GetComponent<Interaction>().enabled = false;
+            newPC.GetComponent<Interaction>().enabled = true;
+
+            GameObject cam = GameObject.Find("Main Camera");
+            Vector3 localPos = cam.transform.localPosition;
+            cam.transform.SetParent(newPC.transform);
+            cam.transform.localPosition = localPos;
+            cam.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+        }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -27,6 +52,7 @@ public class Interaction : MonoBehaviour {
                 if(currentCarriedObject != null)
                 {
                     currentCarriedObject.transform.parent = null;
+                    currentCarriedObject.GetComponent<Rigidbody>().isKinematic = false;
                     currentCarriedObject = null; 
                 }
             }
@@ -37,6 +63,7 @@ public class Interaction : MonoBehaviour {
                     if (currentCarriedObject == null)
                     {
                         currentCarriedObject = lookingAtObject;
+                        currentCarriedObject.GetComponent<Rigidbody>().isKinematic = true;
                         currentCarriedObject.transform.SetParent(this.gameObject.transform);
                     }
                 }
@@ -55,13 +82,13 @@ public class Interaction : MonoBehaviour {
 
                 if (lookingAtObject.name == "Loose" )
                 {
-                    if(GameObject.Find("Treb").GetComponent<Trebuchet>().isArmed)
+                    if(GameObject.Find("Catapult").GetComponent<Catapult>().isArmed)
                     {
-                        GameObject.Find("Treb").GetComponent<Trebuchet>().Loose();
+                        GameObject.Find("Catapult").GetComponent<Catapult>().Loose();
                     }
                     else
                     {
-                        GameObject.Find("Treb").GetComponent<Trebuchet>().Arm();
+                        GameObject.Find("Catapult").GetComponent<Catapult>().Arm();
                     }
 
                 }
@@ -76,16 +103,25 @@ public class Interaction : MonoBehaviour {
         {
             if (lookingAtObject.name == "TurnCW" && Input.GetKey(KeyCode.E))
             {
-                GameObject.Find("Treb").transform.Rotate(0, -.5f, 0);
+                GameObject.Find("Catapult").transform.Rotate(0, -.5f, 0);
             }
-            if (lookingAtObject.name == "TurnCCW" && Input.GetKey(KeyCode.E))
+            else if (lookingAtObject.name == "TurnCCW" && Input.GetKey(KeyCode.E))
             {
-                GameObject.Find("Treb").transform.Rotate(0, .5f, 0);
+                GameObject.Find("Catapult").transform.Rotate(0, .5f, 0);
             }
-            if(lookingAtObject.name == "SpawnEnemy" && Input.GetKeyDown(KeyCode.E))
+            else if (lookingAtObject.name == "ReleaseSooner" && Input.GetKey(KeyCode.E))
+            {
+                GameObject.Find("StopBar").transform.Rotate(-.5f,0, 0);
+            }
+            else if (lookingAtObject.name == "ReleaseLater" && Input.GetKey(KeyCode.E))
+            {
+                GameObject.Find("StopBar").transform.Rotate(.5f, 0, 0);
+            }
+            else if (lookingAtObject.name == "SpawnEnemy" && Input.GetKeyDown(KeyCode.E))
             {
                 GameObject.Find("EnemyController").GetComponent<EnemyController>().spawnSiegeTower();
             }
+
         }
 
     }
