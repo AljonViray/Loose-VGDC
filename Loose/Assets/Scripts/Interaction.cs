@@ -22,13 +22,13 @@ public class Interaction : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
             GameObject newPC;
-            if(this.gameObject.name == "Player")
+            if(this.gameObject.name == "Player_Loader")
             {
-                newPC = GameObject.Find("Scout");
+                newPC = GameObject.Find("Player_Scout");
             }
             else
             {
-                newPC = GameObject.Find("Player");
+                newPC = GameObject.Find("Player_Loader");
             }
 
             this.gameObject.GetComponent<MovementAndLook>().enabled = false;
