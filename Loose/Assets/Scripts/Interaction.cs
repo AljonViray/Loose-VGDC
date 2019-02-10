@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interaction : MonoBehaviour {
-
+public class Interaction : MonoBehaviour
+{
 
     private GameObject lookingAtObject;
     private Ray lineOfSightRay;
     private GameObject activeCam;
     public GameObject currentCarriedObject;
-	// Use this for initialization
-	void Start () {
+
+
+    void Start ()
+    {
         currentCarriedObject = null;
         activeCam = this.gameObject.transform.GetChild(0).gameObject;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+
+    void Update ()
+    {
         lookingAtObject = closestObject(3);
 
         if(Input.GetKeyDown(KeyCode.Tab))
@@ -47,37 +50,28 @@ public class Interaction : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if(lookingAtObject == null)
+            if(lookingAtObject == null && currentCarriedObject != null)
             {
-                if(currentCarriedObject != null)
-                {
-                    currentCarriedObject.transform.parent = null;
-                    currentCarriedObject.GetComponent<Rigidbody>().isKinematic = false;
-                    currentCarriedObject = null; 
-                }
+                currentCarriedObject.transform.parent = null;
+                currentCarriedObject.GetComponent<Rigidbody>().isKinematic = false;
+                currentCarriedObject = null; 
             }
+
             else
             {
-                if( lookingAtObject.tag == "Ammo")
+                if( lookingAtObject.tag == "Ammo" && currentCarriedObject == null)
                 {
-                    if (currentCarriedObject == null)
-                    {
-                        currentCarriedObject = lookingAtObject;
-                        currentCarriedObject.GetComponent<Rigidbody>().isKinematic = true;
-                        currentCarriedObject.transform.SetParent(this.gameObject.transform);
-                    }
+                    currentCarriedObject = lookingAtObject;
+                    currentCarriedObject.GetComponent<Rigidbody>().isKinematic = true;
+                    currentCarriedObject.transform.SetParent(this.gameObject.transform);
                 }
-                else if (lookingAtObject.tag == "Container")
+                else if (lookingAtObject.tag == "Container" && currentCarriedObject != null)
                 {    
-                    if (currentCarriedObject != null)
-                    {
+                    currentCarriedObject.transform.SetParent(lookingAtObject.transform);
 
-                        currentCarriedObject.transform.SetParent(lookingAtObject.transform);
+                    currentCarriedObject.transform.localPosition = new Vector3(0, 1.3f, 0);
 
-                        currentCarriedObject.transform.localPosition = new Vector3(0, 1.3f, 0);
-
-                        currentCarriedObject = null;
-                    }
+                    currentCarriedObject = null;
                 }
 
                 if (lookingAtObject.name == "Loose" )

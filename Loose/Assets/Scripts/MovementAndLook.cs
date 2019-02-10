@@ -6,59 +6,79 @@ using UnityEngine;
 
 public class MovementAndLook : MonoBehaviour {
 
+    private float speedMult;
+    public float normalSpeed;
+    public float sprintSpeed;
+    private Vector3 movement = Vector3.zero;
+
     public float lookSensitivity;
-    private float _currentMoveSpeed;
-    public float normalMoveSpeed;
-    public float sprintingSpeed;
-    
-    public float gravity;
+    public float jumpPower;
+
+    private Rigidbody rb;
 
 
-	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        rb = GetComponent<Rigidbody>();
+
+        speedMult = normalSpeed;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+
+	void Update ()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            _currentMoveSpeed = sprintingSpeed;
+            speedMult = sprintSpeed;
         }
-        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            _currentMoveSpeed = normalMoveSpeed;
+            speedMult = normalSpeed;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (Input.GetKeyDown(KeyCode.Space) && rb.velocity.y == 0)
         {
-            this.GetComponent<Rigidbody>().AddForce(0, 500, 0);
+            rb.AddForce(new Vector3(0, jumpPower, 0), ForceMode.VelocityChange);
         }
+
         Look();
-
-
     }
-    private void FixedUpdate()
+
+
+    void FixedUpdate ()
     {
-        Move();
+        float hAxis = Input.GetAxis("Horizontal");
+        float vAxis = Input.GetAxis("Vertical");
+
+        Vector3 moveHorizontal = transform.right * hAxis;
+        Vector3 moveVertical = transform.forward * vAxis;
+
+        Vector3 velocity = (moveHorizontal + moveVertical).normalized * speedMult;
+
+        Move(velocity);
     }
 
-    void Move()
+
+
+    void Move (Vector3 velocity)
     {
-        Vector3 moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        moveDir = this.transform.TransformDirection(moveDir);
-        moveDir *= _currentMoveSpeed * Time.deltaTime * 14;
-
-        this.GetComponent<Rigidbody>().AddForce(moveDir, ForceMode.VelocityChange);
+        if (velocity != Vector3.zero)
+        {
+            rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+        }
     }
 
-    void Look()
+
+    void Look ()
     {
         float scaledMouseDeltaX = Input.GetAxis("Mouse X") * lookSensitivity;
         float scaledMouseDeltaY = Input.GetAxis("Mouse Y") * lookSensitivity;
 
-        this.gameObject.transform.Rotate(0, scaledMouseDeltaX, 0);
-        float upDownLookAngle = this.gameObject.transform.GetComponentInChildren<Camera>().transform.eulerAngles.x;
+        transform.Rotate(0, scaledMouseDeltaX, 0);
+        float upDownLookAngle = transform.GetComponentInChildren<Camera>().transform.eulerAngles.x;
         if (upDownLookAngle > 90)
         {
             upDownLookAngle -= 360;
@@ -66,8 +86,7 @@ public class MovementAndLook : MonoBehaviour {
 
         if (upDownLookAngle - scaledMouseDeltaY < 80 && upDownLookAngle - scaledMouseDeltaY > -80)
         {
-
-            this.gameObject.transform.GetComponentInChildren<Camera>().transform.Rotate(-scaledMouseDeltaY, 0, 0);
+            transform.GetComponentInChildren<Camera>().transform.Rotate(-scaledMouseDeltaY, 0, 0);
         }
     }
 }
