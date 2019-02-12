@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
-
     private GameObject lookingAtObject;
     private Ray lineOfSightRay;
     private GameObject activeCam;
     public GameObject currentCarriedObject;
+
+    public GameObject castleArea;
+    private Vector3 center;
+    private Vector3 size;
+    public float amountToSpawn;
+    public GameObject rockPrefab;
 
 
     void Start ()
@@ -115,12 +120,27 @@ public class Interaction : MonoBehaviour
             {
                 GameObject.Find("EnemyController").GetComponent<EnemyController>().spawnSiegeTower();
             }
+            else if (lookingAtObject.name == "SpawnRocks" && Input.GetKeyDown(KeyCode.E))
+            {
+                castleArea = GameObject.Find("CastleArea");
+                center = castleArea.transform.position;
+                size = castleArea.transform.localScale;
+
+                for (int i=0; i < amountToSpawn; i++)
+                {
+                    Vector3 spawnPoint = center + new Vector3
+                        (Random.Range(-size.x/2, size.x/2), 0, Random.Range(-size.z / 2, size.z / 2));
+
+                    Instantiate(rockPrefab, spawnPoint, Quaternion.identity);
+                }
+            }
 
         }
 
     }
 
-    GameObject closestObject(float maxRange) {
+    GameObject closestObject(float maxRange)
+    {
         RaycastHit hit;
         if (Physics.Raycast(activeCam.transform.position, activeCam.transform.TransformDirection(Vector3.forward), out hit, maxRange))
         {

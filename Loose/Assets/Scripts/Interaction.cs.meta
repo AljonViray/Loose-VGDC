@@ -3,7 +3,11 @@ guid: 22d4575d418c5074ba3aaf51ad162b64
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - currentCarriedObject: {instanceID: 0}
+  - castleArea: {instanceID: 0}
+  - rockPrefab: {fileID: 1290502255752060, guid: 108de31caf115e84ebfde6f09f3b3f23,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class Ammo : MonoBehaviour {
 
+    public GameObject castleArea;
     public float damage;
+    public float waitTime;
     public bool friendlyToPlayer;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    private void Start()
+    {
+        castleArea = GameObject.Find("CastleArea");
+    }
+
+    private void OnTriggerExit(Collider castleArea)
+    {
+        Destroy(gameObject, waitTime);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
