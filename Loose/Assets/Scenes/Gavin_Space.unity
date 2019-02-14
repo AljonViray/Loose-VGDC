@@ -899,6 +899,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCarriedObject: {fileID: 0}
+  castleArea: {fileID: 0}
+  amountToSpawn: 0
+  rockPrefab: {fileID: 0}
 --- !u!114 &444080412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -911,10 +914,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d3e48fc89393b4683f7dd8a19f518a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalSpeed: 0
+  sprintSpeed: 0
   lookSensitivity: 1
-  normalMoveSpeed: 2
-  sprintingSpeed: 5
-  gravity: 2
+  jumpPower: 0
 --- !u!136 &444080413
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1952,10 +1955,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d3e48fc89393b4683f7dd8a19f518a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalSpeed: 10
+  sprintSpeed: 20
   lookSensitivity: 1
-  normalMoveSpeed: 2
-  sprintingSpeed: 5
-  gravity: 2
+  jumpPower: 10
 --- !u!114 &1046643705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1969,6 +1972,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCarriedObject: {fileID: 0}
+  castleArea: {fileID: 0}
+  amountToSpawn: 0
+  rockPrefab: {fileID: 0}
 --- !u!1001 &1056659777
 PrefabInstance:
   m_ObjectHideFlags: 0
