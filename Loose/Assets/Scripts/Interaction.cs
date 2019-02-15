@@ -20,7 +20,7 @@ public class Interaction : MonoBehaviour
     {
         currentCarriedObject = null;
         activeCam = this.gameObject.transform.GetChild(0).gameObject;
-    }
+    } 
 
 
     void Update ()
@@ -110,11 +110,15 @@ public class Interaction : MonoBehaviour
             }
             else if (lookingAtObject.name == "ReleaseSooner" && Input.GetKey(KeyCode.E))
             {
-                GameObject.Find("StopBar").transform.Rotate(-.5f,0, 0);
+                GameObject bar = GameObject.Find("StopBar");
+                bar.transform.Rotate(-.5f,0, 0);
+                Debug.Log(bar.transform.eulerAngles);
             }
             else if (lookingAtObject.name == "ReleaseLater" && Input.GetKey(KeyCode.E))
             {
-                GameObject.Find("StopBar").transform.Rotate(.5f, 0, 0);
+                GameObject bar = GameObject.Find("StopBar");
+                bar.transform.Rotate(.5f, 0, 0);
+                Debug.Log(bar.transform.eulerAngles);
             }
             else if (lookingAtObject.name == "SpawnEnemy" && Input.GetKeyDown(KeyCode.E))
             {
