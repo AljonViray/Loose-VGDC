@@ -7,6 +7,8 @@ TagManager:
   - Ammo
   - Container
   - Enemy
+  - Catapult
+  - Storage
   layers:
   - Default
   - TransparentFX
