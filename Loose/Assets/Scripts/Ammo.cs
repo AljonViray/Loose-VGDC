@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ammo : MonoBehaviour {
 
     public GameObject castleArea;
+    public TrailRenderer trail;
     public float damage;
     public float waitTime;
     public bool friendlyToPlayer;
@@ -13,10 +14,12 @@ public class Ammo : MonoBehaviour {
     private void Start()
     {
         castleArea = GameObject.Find("CastleArea");
+        trail = this.gameObject.GetComponent<TrailRenderer>();
     }
 
     private void OnTriggerExit(Collider castleArea)
     {
+        trail.enabled = true;
         Destroy(gameObject, waitTime);
     }
 
