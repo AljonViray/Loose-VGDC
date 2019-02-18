@@ -5,22 +5,32 @@ using UnityEngine;
 public class Ammo : MonoBehaviour {
 
     public GameObject castleArea;
+    public GameObject catapult;
     public TrailRenderer trail;
     public float damage;
-    public float waitTime;
     public bool friendlyToPlayer;
+    public bool outsideOfCastle;
 
 
     private void Start()
     {
         castleArea = GameObject.Find("CastleArea");
+        catapult = GameObject.Find("Catapult");
         trail = this.gameObject.GetComponent<TrailRenderer>();
+    }
+
+    private void Update()
+    {
+        if (catapult.GetComponent<Catapult>().isArmed && outsideOfCastle == true)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider castleArea)
     {
         trail.enabled = true;
-        Destroy(gameObject, waitTime);
+        outsideOfCastle = true;
     }
 
     private void OnCollisionEnter(Collision collision)
