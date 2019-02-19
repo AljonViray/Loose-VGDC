@@ -8,31 +8,38 @@ public class Interaction : MonoBehaviour
     private Ray lineOfSightRay;
     public RaycastHit hit;
 
+    public GameObject catapult;
+    public float maxAngle;
+    public float minAngle;
+
     private GameObject activeCam;
     public GameObject newPC;
     public GameObject currentCarriedObject;
 
-    public GameObject castleArea;
     private Vector3 center;
     private Vector3 size;
+    public GameObject castleArea;
 
-    public float amountToSpawn;
+    private GameObject ammoSpawn;
     public GameObject rockPrefab;
-    public GameObject ammoSpawn;
+    public float amountToSpawn;
     public int maxAmmo;
 
 
     void Start ()
     {
+        catapult = GameObject.Find("Catapult");
+
         currentCarriedObject = null;
         activeCam = this.gameObject.transform.GetChild(0).gameObject;
     }
 
 
-    void Update()
+    void Update ()
     {
-        lookingAtObject = closestObject(3);
+        lookingAtObject = closestObject(5);
 
+        //Switch Player Characters
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (this.gameObject.name == "Player_Loader")
@@ -60,92 +67,68 @@ public class Interaction : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.E))
+        //Pick up Ammo objects
+        if (lookingAtObject.tag == "Ammo" && currentCarriedObject == null && Input.GetKey(KeyCode.E))
         {
-            if (lookingAtObject == null && currentCarriedObject != null)
-            {
-                currentCarriedObject.transform.parent = null;
-                currentCarriedObject.GetComponent<Rigidbody>().isKinematic = false;
-                currentCarriedObject = null;
-            }
-
-            else
-            {
-                //Pick up Ammo Object
-                if (lookingAtObject.tag == "Ammo" && currentCarriedObject == null)
-                {
-                    currentCarriedObject = lookingAtObject;
-                    currentCarriedObject.GetComponent<Rigidbody>().isKinematic = true;
-                    currentCarriedObject.transform.SetParent(this.gameObject.transform);
-                }
-                else if (lookingAtObject.tag == "Container" && currentCarriedObject != null)
-                {
-                    currentCarriedObject.transform.SetParent(lookingAtObject.transform);
-                    currentCarriedObject.transform.localPosition = new Vector3(0, 1.3f, 0);
-                    currentCarriedObject = null;
-                }
-
-                if (lookingAtObject.name == "Loose")
-                {
-                    if (GameObject.Find("Catapult").GetComponent<Catapult>().isArmed)
-                    {
-                        GameObject.Find("Catapult").GetComponent<Catapult>().Loose();
-                    }
-                    else
-                    {
-                        GameObject.Find("Catapult").GetComponent<Catapult>().Arm();
-                    }
-                }
-
-            }
-
-
+            currentCarriedObject = lookingAtObject;
+            currentCarriedObject.GetComponent<Rigidbody>().isKinematic = true;
+            currentCarriedObject.transform.SetParent(this.gameObject.transform);
+        }
+        else if (currentCarriedObject != null && Input.GetKey(KeyCode.E))
+        {
+            currentCarriedObject.transform.parent = null;
+            currentCarriedObject.GetComponent<Rigidbody>().isKinematic = false;
+            currentCarriedObject = null;
         }
 
 
+        //Interact with buttons, etc.
         if (lookingAtObject != null)
         {
-            if (lookingAtObject.name == "TurnCW" && Input.GetKey(KeyCode.E))
+            if (lookingAtObject.name == "Loose")
             {
-                GameObject.Find("Catapult").transform.Rotate(0, -.5f, 0);
+                if (Input.GetKeyDown(KeyCode.E) && catapult.GetComponent<Catapult>().isArmed)
+                {
+                    catapult.GetComponent<Catapult>().Loose();
+                }
+                else if (Input.GetKeyDown(KeyCode.E) && !catapult.GetComponent<Catapult>().isArmed)
+                {
+                    catapult.GetComponent<Catapult>().Arm();
+                }
             }
-            else if (lookingAtObject.name == "TurnCCW" && Input.GetKey(KeyCode.E))
+
+            if (lookingAtObject.name == "TurnCatapult")
             {
-                GameObject.Find("Catapult").transform.Rotate(0, .5f, 0);
+                if (Input.GetKey(KeyCode.E))
+                {
+                    catapult.transform.Rotate(0, .5f, 0);
+                }
+                else if (Input.GetKey(KeyCode.Q))
+                {
+                    catapult.transform.Rotate(0, -.5f, 0);
+                }
             }
-            else if (lookingAtObject.name == "ReleaseSooner" && Input.GetKey(KeyCode.E))
+
+            else if (lookingAtObject.name == "ChangeAngle")
             {
                 GameObject bar = GameObject.Find("StopBar");
-                bar.transform.Rotate(-.5f, 0, 0);
-                Debug.Log(bar.transform.eulerAngles);
+
+                if (Input.GetKey(KeyCode.E) && bar.transform.rotation.x <= maxAngle)
+                {
+                    bar.transform.Rotate(.5f, 0, 0);
+                }
+                else if (Input.GetKey(KeyCode.Q) && bar.transform.rotation.x >= minAngle)
+                {
+                    bar.transform.Rotate(-.5f, 0, 0);
+                }
+
+                Debug.Log(bar.transform.rotation);
             }
-            else if (lookingAtObject.name == "ReleaseLater" && Input.GetKey(KeyCode.E))
-            {
-                GameObject bar = GameObject.Find("StopBar");
-                bar.transform.Rotate(.5f, 0, 0);
-                Debug.Log(bar.transform.eulerAngles);
-            }
+
             else if (lookingAtObject.name == "SpawnEnemy" && Input.GetKeyDown(KeyCode.E))
             {
                 GameObject.Find("EnemyController").GetComponent<EnemyController>().spawnSiegeTower();
             }
-
-            //TO BE REMOVED//
-            else if (lookingAtObject.name == "SpawnRocks" && Input.GetKeyDown(KeyCode.E))
-            {
-                castleArea = GameObject.Find("CastleArea");
-                center = castleArea.transform.position;
-                size = castleArea.transform.localScale;
-
-                for (int i = 0; i < amountToSpawn; i++)
-                {
-                    Vector3 spawnPoint = center + new Vector3
-                        (Random.Range(-size.x / 2, size.x / 2), 0, Random.Range(-size.z / 2, size.z / 2));
-
-                    Instantiate(rockPrefab, spawnPoint, Quaternion.identity);
-                }
-            }
-            //TO BE REMOVED//
 
             else if (lookingAtObject.tag == "Storage" && Input.GetKeyDown(KeyCode.E))
             {

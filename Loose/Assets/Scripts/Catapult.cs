@@ -5,23 +5,18 @@ using UnityEngine;
 public class Catapult : MonoBehaviour {
 
     GameObject loadedAmmo;
-
     public bool isArmed;
-
     Quaternion armedRotation;
 
-	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         isArmed = true;
         armedRotation = this.transform.GetChild(0).GetChild(0).transform.rotation;
     }
 	
-	// Update is called once per frame
-	void Update () {
 
-	}
-
-    public void Loose() {
+    public void Loose()
+    {
         if(isArmed)
         {
             this.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
@@ -30,12 +25,13 @@ public class Catapult : MonoBehaviour {
 
     }
 
+
     public void Arm()
     {
         if(isArmed == false)
         {
             this.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
-            this.transform.GetChild(0).GetChild(0).transform.Rotate(110 - this.transform.GetChild(0).GetChild(0).transform.rotation.eulerAngles.x,0,0);
+            this.transform.GetChild(0).GetChild(0).transform.Rotate(110 - this.transform.GetChild(0).GetChild(0).transform.rotation.eulerAngles.x, 0, 0);
             isArmed = true;
         }
 

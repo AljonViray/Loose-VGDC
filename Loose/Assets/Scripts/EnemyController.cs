@@ -2,21 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour {
+public class EnemyController : MonoBehaviour
+{
     public GameObject siegeTowerPrefab;
-
     float spawnEuler;
-	// Use this for initialization
-	void Start () {
+
+    void Start ()
+    {
         spawnSiegeTower();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
-        
-
-	}
 
     public void spawnSiegeTower()
     {
@@ -34,6 +29,7 @@ public class EnemyController : MonoBehaviour {
            , Quaternion.LookRotation(new Vector3(0, 0, 0) - newSiegeTower.transform.position), 1f);
         newSiegeTower.transform.Translate(0, 0, 0);
     }
+
 
     private bool CheckForSpawn(Vector3 location)
     {
