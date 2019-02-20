@@ -413,6 +413,11 @@ PrefabInstance:
       propertyPath: castleArea
       value: 
       objectReference: {fileID: 749042749}
+    - target: {fileID: 114660086856438772, guid: 108de31caf115e84ebfde6f09f3b3f23,
+        type: 3}
+      propertyPath: waitTime
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 108de31caf115e84ebfde6f09f3b3f23, type: 3}
 --- !u!1 &170076733
@@ -1613,6 +1618,11 @@ PrefabInstance:
       propertyPath: castleArea
       value: 
       objectReference: {fileID: 749042749}
+    - target: {fileID: 114660086856438772, guid: 108de31caf115e84ebfde6f09f3b3f23,
+        type: 3}
+      propertyPath: waitTime
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 108de31caf115e84ebfde6f09f3b3f23, type: 3}
 --- !u!1 &1023352976

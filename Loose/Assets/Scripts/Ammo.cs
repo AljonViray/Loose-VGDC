@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class Ammo : MonoBehaviour {
     public float damage;
     public bool friendlyToPlayer;
     public bool outsideOfCastle;
+    public bool canDamage = true;
 
 
     private void Start()
@@ -21,7 +23,12 @@ public class Ammo : MonoBehaviour {
 
     private void Update()
     {
-        if (catapult.GetComponent<Catapult>().isArmed && outsideOfCastle == true)
+        if (gameObject.transform.position.y < 1 && canDamage && outsideOfCastle)
+        {
+            canDamage = false;
+        }
+
+        if (catapult.GetComponent<Catapult>().isArmed && outsideOfCastle)
         {
             Destroy(gameObject);
         }
@@ -33,12 +40,13 @@ public class Ammo : MonoBehaviour {
         outsideOfCastle = true;
     }
 
+
     private void OnCollisionEnter(Collision collision)
     {
-        //if opposite faction, deal damage
         //Debug.Log("HIT : " + collision.gameObject);
         DamageableEntity colEntity = collision.gameObject.GetComponent<DamageableEntity>();
-        if (colEntity != null && colEntity.friendlyToPlayer != friendlyToPlayer)
+
+        if (colEntity != null && colEntity.friendlyToPlayer != friendlyToPlayer && canDamage)
         {
             collision.gameObject.GetComponent<DamageableEntity>().takeDamage(damage);
         }

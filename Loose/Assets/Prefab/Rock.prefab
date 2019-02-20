@@ -127,6 +127,7 @@ MonoBehaviour:
   catapult: {fileID: 0}
   trail: {fileID: 0}
   damage: 100
+  waitTime: 5
   friendlyToPlayer: 1
   outsideOfCastle: 0
 --- !u!96 &2706455800561340754
