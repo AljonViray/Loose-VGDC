@@ -34,7 +34,7 @@ public class SiegeTower : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag.Equals("Siege_Tower_Unarmored"))
+        if (collision.collider.tag.Equals("Enemy"))
         {
             SiegeTower towerScript = collision.gameObject.GetComponent<SiegeTower>();
             int num = Random.Range(0, 2);
@@ -42,10 +42,8 @@ public class SiegeTower : MonoBehaviour {
                 this.canMove = false;
             else
             {
-                if (towerScript.canMove == true)
+                if (this.canMove == true)
                     towerScript.canMove = false;
-                else
-                    this.canMove = false;
             }
         }
     }

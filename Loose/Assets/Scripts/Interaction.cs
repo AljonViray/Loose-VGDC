@@ -68,17 +68,20 @@ public class Interaction : MonoBehaviour
 
 
         //Pick up Ammo objects
-        if (lookingAtObject.tag == "Ammo" && currentCarriedObject == null && Input.GetKey(KeyCode.E))
+        if (lookingAtObject != null)
         {
-            currentCarriedObject = lookingAtObject;
-            currentCarriedObject.GetComponent<Rigidbody>().isKinematic = true;
-            currentCarriedObject.transform.SetParent(this.gameObject.transform);
-        }
-        else if (currentCarriedObject != null && Input.GetKey(KeyCode.E))
-        {
-            currentCarriedObject.transform.parent = null;
-            currentCarriedObject.GetComponent<Rigidbody>().isKinematic = false;
-            currentCarriedObject = null;
+            if (lookingAtObject.tag == "Ammo" && currentCarriedObject == null && Input.GetKey(KeyCode.E))
+            {
+                currentCarriedObject = lookingAtObject;
+                currentCarriedObject.GetComponent<Rigidbody>().isKinematic = true;
+                currentCarriedObject.transform.SetParent(this.gameObject.transform);
+            }
+            else if (currentCarriedObject != null && Input.GetKey(KeyCode.E))
+            {
+                currentCarriedObject.transform.parent = null;
+                currentCarriedObject.GetComponent<Rigidbody>().isKinematic = false;
+                currentCarriedObject = null;
+            }
         }
 
 
