@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
 
     void Start ()
     {
-        spawnSiegeTower();
+        //spawnSiegeTower();
 	}
 	
 

@@ -9,6 +9,7 @@ public class DamageableEntity : MonoBehaviour {
 
     public void takeDamage( float damageAmount)
     {
+        GameObject.Find("LevelManager").GetComponent<LvlManager>().IncreaseScore();
         health -= damageAmount;
         if( health <= 0)
         {
