@@ -76,6 +76,10 @@ public class Interaction : MonoBehaviour
                 currentCarriedObject.GetComponent<Rigidbody>().isKinematic = true;
                 currentCarriedObject.transform.SetParent(this.gameObject.transform);
             }
+            else if (lookingAtObject.tag == "Ammo" && Input.GetKey(KeyCode.F))
+            {
+                lookingAtObject.transform.GetChild(0).gameObject.SetActive(!lookingAtObject.transform.GetChild(0).gameObject.activeSelf);
+            }
             else if (currentCarriedObject != null && Input.GetKey(KeyCode.E))
             {
                 currentCarriedObject.transform.parent = null;
