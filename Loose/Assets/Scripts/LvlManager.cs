@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LvlManager : MonoBehaviour
 {
     public int score;
     public int enemiesInPlay;
+    public GameObject canvasScoreTextObj;
 
     private int enemiesToSpawn;
     private int enemiesSpawned;
     private float spawnTimer;
     private float timeSinceSpawn;
+    private Text scoreText;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,8 @@ public class LvlManager : MonoBehaviour
         enemiesSpawned = 0;
         spawnTimer = 10.0f;
         timeSinceSpawn = 0.0f;
+        scoreText = canvasScoreTextObj.GetComponent<Text>();
+        scoreText.text = "Score: 0";
     }
 
     // Update is called once per frame
@@ -40,6 +45,7 @@ public class LvlManager : MonoBehaviour
     {
         ++score;
         --enemiesInPlay;
+        scoreText.text = "Score: " + score.ToString();
     }
 
     private void SpawnEnemy()
