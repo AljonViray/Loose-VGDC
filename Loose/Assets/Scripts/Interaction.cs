@@ -8,13 +8,15 @@ public class Interaction : MonoBehaviour
     private Ray lineOfSightRay;
     public RaycastHit hit;
 
-    public GameObject catapult;
+    private GameObject catapult;
     public float maxAngle;
     public float minAngle;
+    public float maxPower;
+    public float minPower;
 
     private GameObject activeCam;
-    public GameObject newPC;
-    public GameObject currentCarriedObject;
+    private GameObject newPC;
+    private GameObject currentCarriedObject;
 
     private Vector3 center;
     private Vector3 size;
@@ -37,7 +39,7 @@ public class Interaction : MonoBehaviour
 
     void Update ()
     {
-        lookingAtObject = closestObject(5);
+        lookingAtObject = closestObject(3);
 
         //Switch Player Characters
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -67,52 +69,56 @@ public class Interaction : MonoBehaviour
         }
 
 
-        //Pick up Ammo objects
         if (lookingAtObject != null)
         {
-            if (lookingAtObject.tag == "Ammo" && currentCarriedObject == null && Input.GetKey(KeyCode.E))
+            //Picking up Ammo objects
+            if (lookingAtObject.tag == "Ammo" && currentCarriedObject == null && Input.GetKeyDown(KeyCode.E))
             {
                 currentCarriedObject = lookingAtObject;
                 currentCarriedObject.GetComponent<Rigidbody>().isKinematic = true;
                 currentCarriedObject.transform.SetParent(this.gameObject.transform);
             }
-            else if (lookingAtObject.tag == "Ammo" && Input.GetKey(KeyCode.F))
+
+            else if (lookingAtObject.tag == "Ammo" && Input.GetKeyDown(KeyCode.F))
             {
                 lookingAtObject.transform.GetChild(0).gameObject.SetActive(!lookingAtObject.transform.GetChild(0).gameObject.activeSelf);
             }
-            else if (currentCarriedObject != null && Input.GetKey(KeyCode.E))
+
+            else if (currentCarriedObject != null && Input.GetKeyDown(KeyCode.E))
             {
                 currentCarriedObject.transform.parent = null;
                 currentCarriedObject.GetComponent<Rigidbody>().isKinematic = false;
                 currentCarriedObject = null;
             }
-        }
 
+         /////////////////////////////////////////////////////////////////
 
-        //Interact with buttons, etc.
-        if (lookingAtObject != null)
-        {
+            //Interacting with buttons, etc.
             if (lookingAtObject.name == "Loose")
             {
-                if (Input.GetKeyDown(KeyCode.E) && catapult.GetComponent<Catapult>().isArmed)
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     catapult.GetComponent<Catapult>().Loose();
                 }
-                else if (Input.GetKeyDown(KeyCode.E) && !catapult.GetComponent<Catapult>().isArmed)
-                {
-                    catapult.GetComponent<Catapult>().Arm();
-                }
             }
 
-            if (lookingAtObject.name == "TurnCatapult")
+            else if (lookingAtObject.name == "ChangePower")
             {
-                if (Input.GetKey(KeyCode.E))
+                GameObject arm = GameObject.Find("Arm");
+                Debug.Log(arm.transform.rotation.x);
+
+                if (catapult.GetComponent<Catapult>().isArmed == false)
                 {
-                    catapult.transform.Rotate(0, .5f, 0);
-                }
-                else if (Input.GetKey(KeyCode.Q))
-                {
-                    catapult.transform.Rotate(0, -.5f, 0);
+                    catapult.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
+
+                    if (Input.GetKey(KeyCode.E))
+                    {
+                        arm.transform.Rotate(.5f, 0, 0);
+                        if (arm.transform.rotation.x >= maxPower)
+                        {
+                            catapult.GetComponent<Catapult>().Arm();
+                        }
+                    }
                 }
             }
 
@@ -130,6 +136,18 @@ public class Interaction : MonoBehaviour
                 }
 
                 Debug.Log(bar.transform.rotation);
+            }
+
+            else if (lookingAtObject.name == "TurnCatapult")
+            {
+                if (Input.GetKey(KeyCode.E))
+                {
+                    catapult.transform.Rotate(0, .5f, 0);
+                }
+                else if (Input.GetKey(KeyCode.Q))
+                {
+                    catapult.transform.Rotate(0, -.5f, 0);
+                }
             }
 
             else if (lookingAtObject.name == "SpawnEnemy" && Input.GetKeyDown(KeyCode.E))

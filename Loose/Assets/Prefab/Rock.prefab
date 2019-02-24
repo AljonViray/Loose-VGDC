@@ -91,7 +91,7 @@ Rigidbody:
   m_GameObject: {fileID: 1290502255752060}
   serializedVersion: 2
   m_Mass: 2.5
-  m_Drag: 0.1
+  m_Drag: 0.25
   m_AngularDrag: 0.25
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -109,8 +109,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.525
-  m_Center: {x: 0.05, y: 0.25, z: 0}
+  m_Radius: 0.55
+  m_Center: {x: 0.1, y: 0.25, z: 0}
 --- !u!114 &114660086856438772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,9 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5489c1dfccd212b4290316377d06d5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castleArea: {fileID: 0}
-  catapult: {fileID: 0}
-  trail: {fileID: 0}
   damage: 100
   friendlyToPlayer: 1
   outsideOfCastle: 0

@@ -2,39 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Catapult : MonoBehaviour {
-
+public class Catapult : MonoBehaviour
+{
     GameObject loadedAmmo;
     public bool isArmed;
-    Quaternion armedRotation;
+    public bool wasFired;
+    float armedRotation;
 
-	void Start ()
+
+	void Start()
     {
         isArmed = true;
-        armedRotation = this.transform.GetChild(0).GetChild(0).transform.rotation;
+        wasFired = false;
+        armedRotation = this.transform.GetChild(0).GetChild(0).transform.rotation.x;
     }
-	
+
 
     public void Loose()
     {
-        if(isArmed)
+        if (isArmed == true)
         {
             this.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
             isArmed = false;
+            wasFired = true;
         }
-
     }
 
 
     public void Arm()
     {
-        if(isArmed == false)
+        if (isArmed == false)
         {
-            this.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
-            this.transform.GetChild(0).GetChild(0).transform.Rotate(110 - this.transform.GetChild(0).GetChild(0).transform.rotation.eulerAngles.x, 0, 0);
             isArmed = true;
+            wasFired = false;
         }
-
-
     }
 }

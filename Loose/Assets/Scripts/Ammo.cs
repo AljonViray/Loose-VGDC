@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Ammo : MonoBehaviour {
 
-    public GameObject castleArea;
-    public GameObject catapult;
-    public TrailRenderer trail;
+    private GameObject castleArea;
+    private GameObject catapult;
+    private TrailRenderer trail;
     public float damage;
     public bool friendlyToPlayer;
     public bool outsideOfCastle;
@@ -25,10 +25,12 @@ public class Ammo : MonoBehaviour {
     {
         if (gameObject.transform.position.y < 1 && canDamage && outsideOfCastle)
         {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<Collider>().enabled = false;
             canDamage = false;
         }
 
-        if (catapult.GetComponent<Catapult>().isArmed && outsideOfCastle)
+        if (catapult.GetComponent<Catapult>().wasFired && outsideOfCastle)
         {
             Destroy(gameObject);
         }
@@ -38,6 +40,7 @@ public class Ammo : MonoBehaviour {
     {
         trail.enabled = true;
         outsideOfCastle = true;
+        catapult.GetComponent<Catapult>().wasFired = false;
     }
 
 
@@ -51,6 +54,4 @@ public class Ammo : MonoBehaviour {
             collision.gameObject.GetComponent<DamageableEntity>().takeDamage(damage);
         }
     }
-
-
 }

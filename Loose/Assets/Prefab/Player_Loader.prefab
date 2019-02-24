@@ -126,7 +126,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6624437048128652068}
-  m_Mesh: {fileID: 4300008, guid: ffaf641b210f5ea41952cf36f1379d66, type: 3}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &6624437048128652079
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -144,7 +144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 28b2e2a9409a67f4eaee9b9525fd048f, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -177,7 +177,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: -0.2, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6624437048128652065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,12 +206,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d4575d418c5074ba3aaf51ad162b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  catapult: {fileID: 0}
+  maxAngle: 0
+  minAngle: 0
   newPC: {fileID: 0}
   currentCarriedObject: {fileID: 0}
   castleArea: {fileID: 0}
-  amountToSpawn: 10
   rockPrefab: {fileID: 1290502255752060, guid: 108de31caf115e84ebfde6f09f3b3f23, type: 3}
-  ammoSpawn: {fileID: 0}
+  amountToSpawn: 10
   maxAmmo: 10
 --- !u!54 &6624437048128652067
 Rigidbody:
