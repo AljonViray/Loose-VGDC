@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LvlManager : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
     public int score;
     public int enemiesInPlay;
@@ -14,7 +14,8 @@ public class LvlManager : MonoBehaviour
     private float spawnTimer;
     private float timeSinceSpawn;
     private Text scoreText;
-    // Start is called before the first frame update
+
+
     void Start()
     {
         score = 0;
@@ -26,7 +27,7 @@ public class LvlManager : MonoBehaviour
         scoreText.text = "Score: 0";
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         timeSinceSpawn += Time.deltaTime;
@@ -37,9 +38,10 @@ public class LvlManager : MonoBehaviour
         }
         else if (enemiesSpawned == enemiesToSpawn && enemiesInPlay == 0)
         {
-            ResetRond();
+            ResetRound();
         }
     }
+
 
     public void IncreaseScore()
     {
@@ -47,6 +49,7 @@ public class LvlManager : MonoBehaviour
         --enemiesInPlay;
         scoreText.text = "Score: " + score.ToString();
     }
+
 
     private void SpawnEnemy()
     {
@@ -56,7 +59,8 @@ public class LvlManager : MonoBehaviour
         timeSinceSpawn = 0.0f;
     }
 
-    private void ResetRond()
+
+    private void ResetRound()
     {
         enemiesSpawned = 0;
         enemiesToSpawn += 5;

@@ -9,22 +9,19 @@ public class Interaction : MonoBehaviour
     public RaycastHit hit;
 
     private GameObject catapult;
-    public float maxAngle;
-    public float minAngle;
-    public float maxPower;
-    public float minPower;
+    public float maxAngle, minAngle;
+    public float maxPower, minPower;
 
     private GameObject activeCam;
     private GameObject newPC;
     private GameObject currentCarriedObject;
 
+    private GameObject castleArea;
     private Vector3 center;
     private Vector3 size;
-    public GameObject castleArea;
 
     private GameObject ammoSpawn;
     public GameObject rockPrefab;
-    public float amountToSpawn;
     public int maxAmmo;
 
 
@@ -105,16 +102,16 @@ public class Interaction : MonoBehaviour
             else if (lookingAtObject.name == "ChangePower")
             {
                 GameObject arm = GameObject.Find("Arm");
-                Debug.Log(arm.transform.rotation.x);
+                Debug.Log(arm.transform.eulerAngles.x);
 
                 if (catapult.GetComponent<Catapult>().isArmed == false)
                 {
-                    catapult.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
+                    catapult.transform.GetChild(1).GetComponent<Rigidbody>().isKinematic = true;
 
-                    if (Input.GetKey(KeyCode.E))
+                    if (Input.GetKeyDown(KeyCode.E))
                     {
-                        arm.transform.Rotate(.5f, 0, 0);
-                        if (arm.transform.rotation.x >= maxPower)
+                        arm.transform.Rotate(20, 0, 0);
+                        if (arm.transform.localRotation.x >= maxPower)
                         {
                             catapult.GetComponent<Catapult>().Arm();
                         }
@@ -125,6 +122,7 @@ public class Interaction : MonoBehaviour
             else if (lookingAtObject.name == "ChangeAngle")
             {
                 GameObject bar = GameObject.Find("StopBar");
+                Debug.Log(bar.transform.rotation.x);
 
                 if (Input.GetKey(KeyCode.E) && bar.transform.rotation.x <= maxAngle)
                 {
@@ -134,8 +132,6 @@ public class Interaction : MonoBehaviour
                 {
                     bar.transform.Rotate(-.5f, 0, 0);
                 }
-
-                Debug.Log(bar.transform.rotation);
             }
 
             else if (lookingAtObject.name == "TurnCatapult")
