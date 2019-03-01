@@ -102,7 +102,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7691919844345633624}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5d3e48fc89393b4683f7dd8a19f518a, type: 3}
   m_Name: 
@@ -118,19 +118,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7691919844345633624}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22d4575d418c5074ba3aaf51ad162b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catapult: {fileID: 0}
   maxAngle: 0
   minAngle: 0
-  newPC: {fileID: 0}
-  currentCarriedObject: {fileID: 0}
-  castleArea: {fileID: 0}
+  maxPower: 0
+  minPower: 0
   rockPrefab: {fileID: 1290502255752060, guid: 108de31caf115e84ebfde6f09f3b3f23, type: 3}
-  amountToSpawn: 10
   maxAmmo: 10
 --- !u!54 &7691919844345633625
 Rigidbody:

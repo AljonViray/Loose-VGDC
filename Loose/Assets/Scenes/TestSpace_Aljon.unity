@@ -2733,16 +2733,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Loader
       objectReference: {fileID: 0}
-    - target: {fileID: 6624437048494721527, guid: c8e7f321ceaf0e047b527f0dd166e9af,
-        type: 3}
-      propertyPath: near clip plane
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624437048494721527, guid: c8e7f321ceaf0e047b527f0dd166e9af,
-        type: 3}
-      propertyPath: far clip plane
-      value: 750
-      objectReference: {fileID: 0}
     - target: {fileID: 6624437048128652077, guid: c8e7f321ceaf0e047b527f0dd166e9af,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2796,51 +2786,6 @@ PrefabInstance:
     - target: {fileID: 6624437048128652077, guid: c8e7f321ceaf0e047b527f0dd166e9af,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624437048128652066, guid: c8e7f321ceaf0e047b527f0dd166e9af,
-        type: 3}
-      propertyPath: castleArea
-      value: 
-      objectReference: {fileID: 749042747}
-    - target: {fileID: 6624437048128652066, guid: c8e7f321ceaf0e047b527f0dd166e9af,
-        type: 3}
-      propertyPath: maxAngle
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624437048128652066, guid: c8e7f321ceaf0e047b527f0dd166e9af,
-        type: 3}
-      propertyPath: minAngle
-      value: -0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624437048128652066, guid: c8e7f321ceaf0e047b527f0dd166e9af,
-        type: 3}
-      propertyPath: maxPower
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624437048128652066, guid: c8e7f321ceaf0e047b527f0dd166e9af,
-        type: 3}
-      propertyPath: minPower
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624437047011089243, guid: c8e7f321ceaf0e047b527f0dd166e9af,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6624437048128652078, guid: c8e7f321ceaf0e047b527f0dd166e9af,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
-    - target: {fileID: 6624437048128652079, guid: c8e7f321ceaf0e047b527f0dd166e9af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 6624437048128652064, guid: c8e7f321ceaf0e047b527f0dd166e9af,
-        type: 3}
-      propertyPath: m_Center.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2910,46 +2855,6 @@ PrefabInstance:
     - target: {fileID: 7691919844345633639, guid: a02ce69eab3a21f45894be2412c99aba,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7691919844345633626, guid: a02ce69eab3a21f45894be2412c99aba,
-        type: 3}
-      propertyPath: castleArea
-      value: 
-      objectReference: {fileID: 749042747}
-    - target: {fileID: 7691919844345633626, guid: a02ce69eab3a21f45894be2412c99aba,
-        type: 3}
-      propertyPath: maxAngle
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7691919844345633626, guid: a02ce69eab3a21f45894be2412c99aba,
-        type: 3}
-      propertyPath: minAngle
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7691919844345633626, guid: a02ce69eab3a21f45894be2412c99aba,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7691919844345633638, guid: a02ce69eab3a21f45894be2412c99aba,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
-    - target: {fileID: 7691919844345633637, guid: a02ce69eab3a21f45894be2412c99aba,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 7691919844345633636, guid: a02ce69eab3a21f45894be2412c99aba,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7691919844345633627, guid: a02ce69eab3a21f45894be2412c99aba,
-        type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
