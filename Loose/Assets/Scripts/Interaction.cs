@@ -39,7 +39,7 @@ public class Interaction : MonoBehaviour
         lookingAtObject = closestObject(3);
 
         //Switch Player Characters
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && this.gameObject.GetComponent<MovementAndLook>().enabled == true)
         {
             if (this.gameObject.name == "Player_Loader")
             {
@@ -62,7 +62,12 @@ public class Interaction : MonoBehaviour
             cam.transform.localPosition = localPos;
             cam.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
-            activeCam = this.gameObject.transform.GetChild(0).gameObject;
+            Debug.Log(this.gameObject);
+            Debug.Log(this.transform.childCount);
+            if(this.transform.childCount > 0)
+            {
+                activeCam = this.gameObject.transform.GetChild(0).gameObject;
+            }
         }
 
 

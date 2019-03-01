@@ -1654,7 +1654,6 @@ GameObject:
   - component: {fileID: 1241724296}
   - component: {fileID: 1241724295}
   - component: {fileID: 1241724294}
-  - component: {fileID: 1241724299}
   - component: {fileID: 1241724293}
   - component: {fileID: 1241724300}
   - component: {fileID: 1241724301}
@@ -1662,6 +1661,7 @@ GameObject:
   - component: {fileID: 1241724303}
   - component: {fileID: 1241724304}
   - component: {fileID: 1241724298}
+  - component: {fileID: 1241724299}
   m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
@@ -1781,21 +1781,21 @@ HingeJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241724292}
-  m_ConnectedBody: {fileID: 58697236}
-  m_Anchor: {x: 0, y: 0, z: 0}
+  m_ConnectedBody: {fileID: 0}
+  m_Anchor: {x: 0, y: -1.23, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 7.1054275e-16, y: 0.175, z: -0.07060005}
+  m_ConnectedAnchor: {x: 49.056892, y: 23.327389, z: 0.0000076293945}
   m_UseSpring: 0
   m_Spring:
     spring: 0
     damper: 0
     targetPosition: 0
-  m_UseMotor: 1
+  m_UseMotor: 0
   m_Motor:
     targetVelocity: 0
     force: 0
-    freeSpin: 1
+    freeSpin: 0
   m_UseLimits: 0
   m_Limits:
     min: 0
@@ -2927,6 +2927,11 @@ PrefabInstance:
       propertyPath: minAngle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7691919844345633626, guid: a02ce69eab3a21f45894be2412c99aba,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7691919844345633638, guid: a02ce69eab3a21f45894be2412c99aba,
         type: 3}
       propertyPath: m_Mesh
@@ -2940,6 +2945,11 @@ PrefabInstance:
     - target: {fileID: 7691919844345633636, guid: a02ce69eab3a21f45894be2412c99aba,
         type: 3}
       propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691919844345633627, guid: a02ce69eab3a21f45894be2412c99aba,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
