@@ -20,7 +20,7 @@ public class Catapult : MonoBehaviour
     {
         if (isArmed == true)
         {
-            this.transform.GetChild(1).GetComponent<Rigidbody>().isKinematic = false;
+            this.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
             isArmed = false;
             wasFired = true;
         }

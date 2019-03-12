@@ -106,20 +106,17 @@ public class Interaction : MonoBehaviour
 
             else if (lookingAtObject.name == "ChangePower")
             {
-                GameObject arm = GameObject.Find("Arm");
-                Debug.Log(arm.transform.eulerAngles.x);
+                Debug.Log(catapult.transform.GetChild(0).GetChild(0).transform.eulerAngles.x);
 
                 if (catapult.GetComponent<Catapult>().isArmed == false)
                 {
-                    catapult.transform.GetChild(1).GetComponent<Rigidbody>().isKinematic = true;
+                    catapult.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
 
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        arm.transform.Rotate(20, 0, 0);
-                        if (arm.transform.localRotation.x >= maxPower)
-                        {
-                            catapult.GetComponent<Catapult>().Arm();
-                        }
+                        //Rotate catapult arm
+                        catapult.transform.GetChild(0).GetChild(0).transform.Rotate(110 - catapult.transform.GetChild(0).GetChild(0).transform.rotation.eulerAngles.x, 0, 0);
+                        catapult.GetComponent<Catapult>().Arm();
                     }
                 }
             }
