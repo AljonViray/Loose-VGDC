@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Catapult
   - Storage
+  - Castle
   layers:
   - Default
   - TransparentFX

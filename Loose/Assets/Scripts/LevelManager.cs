@@ -42,7 +42,6 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-
     public void IncreaseScore()
     {
         ++score;

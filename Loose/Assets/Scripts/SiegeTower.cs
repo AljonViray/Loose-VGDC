@@ -47,4 +47,13 @@ public class SiegeTower : MonoBehaviour {
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Equals("Castle"))
+        {
+            SceneManager sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+            sceneManager.LoseGame();
+        }
+    }
 }
