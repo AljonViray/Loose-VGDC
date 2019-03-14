@@ -6303,7 +6303,7 @@ PrefabInstance:
     - target: {fileID: 6624437048128652066, guid: c8e7f321ceaf0e047b527f0dd166e9af,
         type: 3}
       propertyPath: rotatingCatpultSpeed
-      value: 0.02
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8475369919327734068, guid: c8e7f321ceaf0e047b527f0dd166e9af, type: 3}

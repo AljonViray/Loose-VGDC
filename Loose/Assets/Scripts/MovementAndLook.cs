@@ -51,8 +51,8 @@ public class MovementAndLook : MonoBehaviour {
         }
 
         Look();
-        hAxis = Input.GetAxis("Horizontal");
-        vAxis = Input.GetAxis("Vertical");
+        hAxis = Input.GetAxisRaw("Horizontal");
+        vAxis = Input.GetAxisRaw("Vertical");
 
     }
 
