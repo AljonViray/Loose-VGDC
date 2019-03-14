@@ -73,6 +73,7 @@ public class Interaction : MonoBehaviour
 
         if (lookingAtObject != null)
         {
+            Debug.Log(lookingAtObject);
             //Picking up Ammo objects
             if (lookingAtObject.tag == "Ammo" && currentCarriedObject == null && Input.GetKeyDown(KeyCode.E))
             {
@@ -96,7 +97,7 @@ public class Interaction : MonoBehaviour
          /////////////////////////////////////////////////////////////////
 
             //Interacting with buttons, etc.
-            if (lookingAtObject.name == "Loose")
+            if (lookingAtObject.CompareTag("Loose"))
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -104,7 +105,7 @@ public class Interaction : MonoBehaviour
                 }
             }
 
-            else if (lookingAtObject.name == "ChangePower")
+            else if (lookingAtObject.CompareTag("Reload"))
             {
                 Debug.Log(catapult.transform.GetChild(0).GetChild(0).transform.eulerAngles.x);
 
@@ -121,7 +122,7 @@ public class Interaction : MonoBehaviour
                 }
             }
 
-            else if (lookingAtObject.name == "ChangeAngle")
+            else if (lookingAtObject.CompareTag("StopBarRotate"))
             {
                 GameObject bar = GameObject.Find("StopBar").transform.GetChild(0).gameObject;
                 Debug.Log(bar.transform.rotation.x);
@@ -169,8 +170,9 @@ public class Interaction : MonoBehaviour
     {
         if (Physics.Raycast(activeCam.transform.position, activeCam.transform.TransformDirection(Vector3.forward), out hit, maxRange))
         {
+            
             Debug.DrawRay(activeCam.transform.position, activeCam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            return hit.transform.gameObject;
+            return hit.collider.gameObject;
         }
         else
         {

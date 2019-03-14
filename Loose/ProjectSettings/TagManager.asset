@@ -13,6 +13,7 @@ TagManager:
   - Loose
   - StopBarRotate
   - CatapultRotate
+  - Reload
   layers:
   - Default
   - TransparentFX
