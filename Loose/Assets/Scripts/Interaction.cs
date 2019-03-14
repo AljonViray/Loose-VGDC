@@ -24,11 +24,16 @@ public class Interaction : MonoBehaviour
     public GameObject rockPrefab;
     public int maxAmmo;
 
+    public bool isGrabbingCatapult;
+
+    public float rotatingCatpultSpeed;
+
+
 
     void Start ()
     {
         catapult = GameObject.Find("Catapult");
-
+        isGrabbingCatapult = false;
         currentCarriedObject = null;
         activeCam = this.gameObject.transform.GetChild(0).gameObject;
     }
@@ -36,7 +41,11 @@ public class Interaction : MonoBehaviour
 
     void Update ()
     {
-        lookingAtObject = closestObject(3);
+        if(isGrabbingCatapult == false)
+        {
+            lookingAtObject = closestObject(3);
+        }
+
 
         //Switch Player Characters
         if (Input.GetKeyDown(KeyCode.Tab) && this.gameObject.GetComponent<MovementAndLook>().enabled == true)
@@ -73,7 +82,7 @@ public class Interaction : MonoBehaviour
 
         if (lookingAtObject != null)
         {
-            Debug.Log(lookingAtObject);
+            //Debug.Log(lookingAtObject);
             //Picking up Ammo objects
             if (lookingAtObject.tag == "Ammo" && currentCarriedObject == null && Input.GetKeyDown(KeyCode.E))
             {
@@ -137,15 +146,19 @@ public class Interaction : MonoBehaviour
                 }
             }
 
-            else if (lookingAtObject.name == "TurnCatapult")
+            else if (lookingAtObject.CompareTag("CatapultRotate"))
             {
-                if (Input.GetKey(KeyCode.E))
+                if (Input.GetKey(KeyCode.E) && isGrabbingCatapult == false)
                 {
-                    catapult.transform.GetChild(0).Rotate(0, .5f, 0);
+                    isGrabbingCatapult = true;
+                    this.gameObject.transform.SetParent(lookingAtObject.transform.parent);
+                    //catapult.transform.GetChild(0).Rotate(0, .5f, 0);
                 }
-                else if (Input.GetKey(KeyCode.Q))
+                else if (Input.GetKey(KeyCode.E) && isGrabbingCatapult == true)
                 {
-                    catapult.transform.GetChild(0).Rotate(0, -.5f, 0);
+                    isGrabbingCatapult = false;
+                    this.gameObject.transform.parent = null;
+                    //catapult.transform.GetChild(0).Rotate(0, -.5f, 0);
                 }
             }
 

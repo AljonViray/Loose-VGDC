@@ -16,9 +16,14 @@ public class MovementAndLook : MonoBehaviour {
 
     private Rigidbody rb;
 
+    private Interaction inter;
+
+    private float hAxis;
+    private float vAxis;
 
 	void Start ()
     {
+        inter = this.gameObject.GetComponent<Interaction>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -30,6 +35,7 @@ public class MovementAndLook : MonoBehaviour {
 
 	void Update ()
     {
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             speedMult = sprintSpeed;
@@ -45,13 +51,42 @@ public class MovementAndLook : MonoBehaviour {
         }
 
         Look();
+        hAxis = Input.GetAxis("Horizontal");
+        vAxis = Input.GetAxis("Vertical");
+
     }
 
 
     void FixedUpdate ()
     {
-        float hAxis = Input.GetAxis("Horizontal");
-        float vAxis = Input.GetAxis("Vertical");
+        if (inter.isGrabbingCatapult)
+        {
+            
+            if (inter.hit.collider.transform.localPosition.x > this.transform.localPosition.x)
+            {
+                if(vAxis > 0)
+                {
+                    this.transform.parent.transform.Rotate(0, inter.rotatingCatpultSpeed, 0);
+                }
+                else if(vAxis < 0)
+                {
+                    this.transform.parent.transform.Rotate(0, -inter.rotatingCatpultSpeed, 0);
+                }
+            }
+            else
+            {
+                if (vAxis > 0)
+                {
+                    this.transform.parent.transform.Rotate(0, -inter.rotatingCatpultSpeed, 0);
+                }
+                else if (vAxis < 0)
+                {
+                    this.transform.parent.transform.Rotate(0, inter.rotatingCatpultSpeed, 0);
+                }
+            }
+            return;
+        }
+        rb.isKinematic = false;
 
         Vector3 moveHorizontal = transform.right * hAxis;
         Vector3 moveVertical = transform.forward * vAxis;
