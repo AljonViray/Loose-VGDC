@@ -10,6 +10,9 @@ TagManager:
   - Catapult
   - Storage
   - Castle
+  - Loose
+  - StopBarRotate
+  - CatapultRotate
   layers:
   - Default
   - TransparentFX
