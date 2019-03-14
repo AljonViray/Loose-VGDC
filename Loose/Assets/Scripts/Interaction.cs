@@ -123,7 +123,7 @@ public class Interaction : MonoBehaviour
 
             else if (lookingAtObject.name == "ChangeAngle")
             {
-                GameObject bar = GameObject.Find("StopBar");
+                GameObject bar = GameObject.Find("StopBar").transform.GetChild(0).gameObject;
                 Debug.Log(bar.transform.rotation.x);
 
                 if (Input.GetKey(KeyCode.E) && bar.transform.rotation.x <= maxAngle)
@@ -140,11 +140,11 @@ public class Interaction : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.E))
                 {
-                    catapult.transform.Rotate(0, .5f, 0);
+                    catapult.transform.GetChild(0).Rotate(0, .5f, 0);
                 }
                 else if (Input.GetKey(KeyCode.Q))
                 {
-                    catapult.transform.Rotate(0, -.5f, 0);
+                    catapult.transform.GetChild(0).Rotate(0, -.5f, 0);
                 }
             }
 

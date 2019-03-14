@@ -9,8 +9,13 @@ public class Throw : MonoBehaviour
 
     void Start ()
     {
-        this.gameObject.GetComponent<Rigidbody>().centerOfMass = this.gameObject.transform.localPosition;
         //this.gameObject.GetComponent<Rigidbody>().AddRelativeTorque(xTorque,0,0,ForceMode.VelocityChange);
 	}
-	
+
+    private void Update()
+    {
+        this.gameObject.GetComponent<Rigidbody>().centerOfMass = this.gameObject.transform.localPosition;
+
+    }
+
 }
