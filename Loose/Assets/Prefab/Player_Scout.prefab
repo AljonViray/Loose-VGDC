@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c7bc651249eba1f4593633f519393c48, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,6 +129,10 @@ MonoBehaviour:
   minPower: 0
   rockPrefab: {fileID: 1290502255752060, guid: 108de31caf115e84ebfde6f09f3b3f23, type: 3}
   maxAmmo: 10
+  isGrabbingCatapult: 0
+  rotatingCatpultSpeed: 0
+  looseSound: {fileID: 0}
+  reloadSound: {fileID: 0}
 --- !u!54 &7691919844345633625
 Rigidbody:
   m_ObjectHideFlags: 0
