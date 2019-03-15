@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  enemiesInPlay: 1
+  enemiesInPlay: 0
+  canvasScoreTextObj: {fileID: 0}

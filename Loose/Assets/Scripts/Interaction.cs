@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Interaction : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Interaction : MonoBehaviour
     private GameObject activeCam;
     private GameObject newPC;
     private GameObject currentCarriedObject;
+
+    private Text itemText;
 
     private GameObject castleArea;
     private Vector3 center;
@@ -36,6 +39,7 @@ public class Interaction : MonoBehaviour
     void Start ()
     {
         catapult = GameObject.Find("Catapult");
+        itemText = GameObject.Find("Canvas").transform.GetChild(3).GetComponent<Text>();
         isGrabbingCatapult = false;
         currentCarriedObject = null;
         activeCam = this.gameObject.transform.GetChild(0).gameObject;
@@ -88,11 +92,32 @@ public class Interaction : MonoBehaviour
         {
             //Debug.Log(lookingAtObject);
             //Picking up Ammo objects
-            if (lookingAtObject.tag == "Ammo" && currentCarriedObject == null && Input.GetKeyDown(KeyCode.E))
+            if (lookingAtObject.tag == "Ammo")
             {
-                currentCarriedObject = lookingAtObject;
-                currentCarriedObject.GetComponent<Rigidbody>().isKinematic = true;
-                currentCarriedObject.transform.SetParent(this.gameObject.transform.GetChild(0));
+                itemText.text = "Ammo\nPress [E] to pick up";
+                if (currentCarriedObject == null && Input.GetKeyDown(KeyCode.E))
+                {
+                    currentCarriedObject = lookingAtObject;
+                    currentCarriedObject.GetComponent<Rigidbody>().isKinematic = true;
+                    currentCarriedObject.transform.SetParent(this.gameObject.transform.GetChild(0));
+                }
+
+                else if (currentCarriedObject != null && Input.GetKeyDown(KeyCode.E))
+                {
+                    currentCarriedObject.transform.parent = null;
+                    currentCarriedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    currentCarriedObject = null;
+                }
+
+                else if (currentCarriedObject != null && Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    //Throw object instead of dropping
+                    currentCarriedObject.transform.parent = null;
+                    currentCarriedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    Vector3 force = new Vector3(500, 250, 0);
+                    currentCarriedObject.GetComponent<Rigidbody>().AddForce(force);
+                    currentCarriedObject = null;
+                }
             }
 
             /*  Currently broken
@@ -103,28 +128,12 @@ public class Interaction : MonoBehaviour
             }
             */
 
-            else if (currentCarriedObject != null && Input.GetKeyDown(KeyCode.E))
-            {
-                currentCarriedObject.transform.parent = null;
-                currentCarriedObject.GetComponent<Rigidbody>().isKinematic = false;
-                currentCarriedObject = null;
-            }
-
-            else if (currentCarriedObject != null && Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                //Throw object instead of dropping
-                currentCarriedObject.transform.parent = null;
-                currentCarriedObject.GetComponent<Rigidbody>().isKinematic = false;
-                Vector3 force = new Vector3(500, 250, 0);
-                currentCarriedObject.GetComponent<Rigidbody>().AddForce(force);
-                currentCarriedObject = null;
-            }
-
             /////////////////////////////////////////////////////////////////
 
             //Interacting with buttons, etc.
             if (lookingAtObject.CompareTag("Loose"))
             {
+                itemText.text = "Catapult\nPress [E] to fire";
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     catapult.GetComponent<Catapult>().Loose();
@@ -147,7 +156,7 @@ public class Interaction : MonoBehaviour
             else if (lookingAtObject.CompareTag("Reload"))
             {
                 //Debug.Log(catapult.transform.GetChild(0).GetChild(0).transform.eulerAngles.x);
-
+                itemText.text = "Reload wheel\nPress [E] to reload";
                 if (catapult.GetComponent<Catapult>().isArmed == false)
                 {
                     catapult.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
@@ -223,6 +232,7 @@ public class Interaction : MonoBehaviour
 
             else if (lookingAtObject.CompareTag("StopBarRotate"))
             {
+                itemText.text = "Release wheel\nPress [E] to release later\nPress [Q] to release sooner";
                 GameObject bar = GameObject.Find("StopBar").transform.GetChild(0).gameObject;
                 //Debug.Log(bar.transform.rotation.x);
 
@@ -249,6 +259,7 @@ public class Interaction : MonoBehaviour
 
             else if (lookingAtObject.CompareTag("CatapultRotate"))
             {
+                itemText.text = "Rotate wheel\nPress [E] to rotate catapult";
                 if (Input.GetKey(KeyCode.E) && isGrabbingCatapult == false)
                 {
                     isGrabbingCatapult = true;
@@ -270,12 +281,18 @@ public class Interaction : MonoBehaviour
 
             else if (lookingAtObject.tag == "Storage" && Input.GetKeyDown(KeyCode.E))
             {
+                itemText.text = "Storage\nPress [E] to spawn ammo";
                 if (GameObject.FindGameObjectsWithTag("Ammo").Length < maxAmmo)
                 {
                     Vector3 adjustedPos = lookingAtObject.transform.position + new Vector3(0, 2, 0);
                     Instantiate(rockPrefab, adjustedPos, Quaternion.identity);
                 }
             }
+        }
+        //Not looking at object, set text to be empty
+        else
+        {
+            itemText.text = "";
         }
     }
 

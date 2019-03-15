@@ -29,6 +29,7 @@ public class SceneManagerScript : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        GameObject.Find("Main Camera").transform.parent = null;
         gameOverPanel.SetActive(true);
         gameOverText.text = "You Lose\nScore: " + levelManager.score.ToString();
     }
@@ -36,11 +37,7 @@ public class SceneManagerScript : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-        LevelManager lvlManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-        lvlManager.score = 0;
-        lvlManager.ResetValues();
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
+        SceneManager.LoadScene("Main Menu");
     }
 
     public void QuitGame()

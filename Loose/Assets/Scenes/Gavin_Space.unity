@@ -913,6 +913,8 @@ MonoBehaviour:
   maxAmmo: 0
   isGrabbingCatapult: 0
   rotatingCatpultSpeed: 0
+  looseSound: {fileID: 0}
+  reloadSound: {fileID: 0}
 --- !u!114 &444080412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1406,7 +1408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4887717725986624, guid: 8d29defdeb7658a43955a52c3218e03f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 94.9
+      value: 303.2
       objectReference: {fileID: 0}
     - target: {fileID: 4887717725986624, guid: 8d29defdeb7658a43955a52c3218e03f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1900,6 +1902,8 @@ MonoBehaviour:
   maxAmmo: 0
   isGrabbingCatapult: 0
   rotatingCatpultSpeed: 0
+  looseSound: {fileID: 0}
+  reloadSound: {fileID: 0}
 --- !u!1001 &1056659777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4249,6 +4253,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6114344555932559435, guid: 1dbd727b8b92c03438f3173daa4998fa,
+        type: 3}
+      propertyPath: m_Name
+      value: Crosshair
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dbd727b8b92c03438f3173daa4998fa, type: 3}

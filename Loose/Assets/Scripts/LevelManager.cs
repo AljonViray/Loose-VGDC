@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
         score = 0;
         enemiesToSpawn = 5;
         enemiesSpawned = 0;
-        spawnTimer = 10.0f;
+        spawnTimer = 20.0f;
         timeSinceSpawn = 0.0f;
         scoreText.text = "Score: 0";
     }
