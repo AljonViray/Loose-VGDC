@@ -52,7 +52,7 @@ public class SiegeTower : MonoBehaviour {
     {
         if (other.tag.Equals("Castle"))
         {
-            SceneManager sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+            SceneManagerScript sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManagerScript>();
             sceneManager.LoseGame();
         }
     }
