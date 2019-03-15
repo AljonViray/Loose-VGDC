@@ -95,11 +95,13 @@ public class Interaction : MonoBehaviour
                 currentCarriedObject.transform.SetParent(this.gameObject.transform.GetChild(0));
             }
 
+            /*  Currently broken
             //Sets ammo on fire
             else if (lookingAtObject.tag == "Ammo" && Input.GetKeyDown(KeyCode.F))
             {
                 lookingAtObject.transform.GetChild(0).gameObject.SetActive(!lookingAtObject.transform.GetChild(0).gameObject.activeSelf);
             }
+            */
 
             else if (currentCarriedObject != null && Input.GetKeyDown(KeyCode.E))
             {
@@ -207,12 +209,16 @@ public class Interaction : MonoBehaviour
                         }
                         */
                     }
+                    
 
                 }
+                /*
                 if (Input.GetKeyUp(KeyCode.E))
                 {
                     hit.collider.gameObject.GetComponentInChildren<Animation>().Stop();
                 }
+                */
+            
             }
 
             else if (lookingAtObject.CompareTag("StopBarRotate"))
