@@ -164,6 +164,7 @@ public class Interaction : MonoBehaviour
                         audioSource.clip = reloadSound;
                         audioSource.Play();
 
+                        /*
                         if (firstPass)
                         {
                             if(catapult.transform.GetChild(0).GetChild(0).transform.localRotation.eulerAngles.x < firstFloat)
@@ -204,7 +205,7 @@ public class Interaction : MonoBehaviour
                                 firstPass = true;
                             }
                         }
-
+                        */
                     }
 
                 }
