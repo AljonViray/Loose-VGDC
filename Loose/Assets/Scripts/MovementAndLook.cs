@@ -53,22 +53,16 @@ public class MovementAndLook : MonoBehaviour {
         Look();
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
-
-    }
-
-
-    void FixedUpdate ()
-    {
         if (inter.isGrabbingCatapult)
         {
-            
+
             if (inter.hit.collider.transform.localPosition.x > this.transform.localPosition.x)
             {
-                if(vAxis > 0)
+                if (vAxis > 0)
                 {
                     this.transform.parent.transform.Rotate(0, inter.rotatingCatpultSpeed, 0);
                 }
-                else if(vAxis < 0)
+                else if (vAxis < 0)
                 {
                     this.transform.parent.transform.Rotate(0, -inter.rotatingCatpultSpeed, 0);
                 }
@@ -84,16 +78,27 @@ public class MovementAndLook : MonoBehaviour {
                     this.transform.parent.transform.Rotate(0, inter.rotatingCatpultSpeed, 0);
                 }
             }
-            return;
+
         }
-        rb.isKinematic = false;
 
-        Vector3 moveHorizontal = transform.right * hAxis;
-        Vector3 moveVertical = transform.forward * vAxis;
+    }
 
-        Vector3 velocity = (moveHorizontal + moveVertical).normalized * speedMult;
 
-        Move(velocity);
+    void FixedUpdate ()
+    {
+        if(inter.isGrabbingCatapult == false)
+        {
+            rb.isKinematic = false;
+
+            Vector3 moveHorizontal = transform.right * hAxis;
+            Vector3 moveVertical = transform.forward * vAxis;
+
+            Vector3 velocity = (moveHorizontal + moveVertical).normalized * speedMult;
+
+            Move(velocity);
+        }
+
+
     }
 
 

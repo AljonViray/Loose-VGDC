@@ -30,9 +30,11 @@ public class Interaction : MonoBehaviour
     public bool isGrabbingCatapult;
     public float rotatingCatpultSpeed;
 
+
     private AudioSource audioSource;
     public AudioClip looseSound;
     public AudioClip reloadSound;
+
 
 
 
@@ -43,7 +45,9 @@ public class Interaction : MonoBehaviour
         isGrabbingCatapult = false;
         currentCarriedObject = null;
         activeCam = this.gameObject.transform.GetChild(0).gameObject;
+
         audioSource = GameObject.Find("Audio Object").GetComponent<AudioSource>();
+
     }
 
 
@@ -79,8 +83,8 @@ public class Interaction : MonoBehaviour
             cam.transform.localPosition = localPos;
             cam.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
-            Debug.Log(this.gameObject);
-            Debug.Log(this.transform.childCount);
+            //Debug.Log(this.gameObject);
+            //Debug.Log(this.transform.childCount);
             if(this.transform.childCount > 0)
             {
                 activeCam = this.gameObject.transform.GetChild(0).gameObject;
@@ -164,9 +168,10 @@ public class Interaction : MonoBehaviour
 
                     if (Input.GetKey(KeyCode.E))
                     {
-                        //Rotate catapult arm
-                        catapult.transform.GetChild(0).GetChild(0).transform.Rotate(110 - catapult.transform.GetChild(0).GetChild(0).transform.rotation.eulerAngles.x, 0, 0);
-                        catapult.GetComponent<Catapult>().Arm();
+
+
+                        catapult.transform.GetChild(0).GetChild(0).transform.Rotate(1, 0, 0);
+                        hit.collider.gameObject.GetComponentInChildren<Animation>().Play();
 
                         if (audioSource.isPlaying == true)
                         {
@@ -175,59 +180,18 @@ public class Interaction : MonoBehaviour
                         audioSource.clip = reloadSound;
                         audioSource.Play();
 
-                        /*
-                        if (firstPass)
-                        {
-                            if(catapult.transform.GetChild(0).GetChild(0).transform.localRotation.eulerAngles.x < firstFloat)
-                            {
-                                Debug.Log("TRUE < FIRST");
-                                catapult.transform.GetChild(0).GetChild(0).transform.Rotate(1, 0, 0);
-                                hit.collider.gameObject.GetComponentInChildren<Animation>().Play();
-                                Debug.Log(catapult.transform.GetChild(0).GetChild(0).transform.localRotation.eulerAngles.x);
-
-                            }
-                            else
-                            {
-                                Debug.Log("TRUE > FIRST");
-                                catapult.transform.GetChild(0).GetChild(0).transform.Rotate(1, 0, 0);
-                                Debug.Log(catapult.transform.GetChild(0).GetChild(0).transform.localRotation.eulerAngles.x);
-
-                                firstPass = false;
-                                //UnityEditor.EditorApplication.isPaused = true;
-                            }
-                            
-                        }
-                        else
-                        {
-                            if (catapult.transform.GetChild(0).GetChild(0).transform.localRotation.eulerAngles.x > secondFloat)
-                            {
-                                Debug.Log("FALSE > SECOND");
-                                catapult.transform.GetChild(0).GetChild(0).transform.Rotate(1, 0, 0);
-                                hit.collider.gameObject.GetComponentInChildren<Animation>().Play();
-
-                            }
-                            else
-                            {
-                                Debug.Log("TRUE < SECOND");
-                                catapult.GetComponent<Catapult>().Arm();
-                                catapult.transform.GetChild(0).GetChild(0).transform.localRotation = Quaternion.Euler(70, 180, 180);
-                                hit.collider.gameObject.GetComponentInChildren<Animation>().Stop();
-
-                                firstPass = true;
-                            }
-                        }
-                        */
                     }
                     
 
                 }
-                /*
+
                 if (Input.GetKeyUp(KeyCode.E))
                 {
                     hit.collider.gameObject.GetComponentInChildren<Animation>().Stop();
+                    audioSource.Stop();
                 }
-                */
-            
+
+
             }
 
             else if (lookingAtObject.CompareTag("StopBarRotate"))
@@ -302,7 +266,7 @@ public class Interaction : MonoBehaviour
         if (Physics.Raycast(activeCam.transform.position, activeCam.transform.TransformDirection(Vector3.forward), out hit, maxRange))
         {
             
-            Debug.DrawRay(activeCam.transform.position, activeCam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            //Debug.DrawRay(activeCam.transform.position, activeCam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             return hit.collider.gameObject;
         }
         else
