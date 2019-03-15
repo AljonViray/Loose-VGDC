@@ -196,7 +196,7 @@ public class Interaction : MonoBehaviour
 
             else if (lookingAtObject.CompareTag("StopBarRotate"))
             {
-                itemText.text = "Release wheel\nPress [E] to release later\nPress [Q] to release sooner";
+                itemText.text = "Release wheel\nPress [Q] to release later\nPress [E] to release sooner";
                 GameObject bar = GameObject.Find("StopBar").transform.GetChild(0).gameObject;
                 //Debug.Log(bar.transform.rotation.x);
 
@@ -223,7 +223,7 @@ public class Interaction : MonoBehaviour
 
             else if (lookingAtObject.CompareTag("CatapultRotate"))
             {
-                itemText.text = "Rotate wheel\nPress [E] to rotate catapult";
+                itemText.text = "Rotate lever\nPress [E] to rotate catapult";
                 if (Input.GetKey(KeyCode.E) && isGrabbingCatapult == false)
                 {
                     isGrabbingCatapult = true;
