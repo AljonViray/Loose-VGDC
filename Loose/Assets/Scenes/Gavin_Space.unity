@@ -911,6 +911,8 @@ MonoBehaviour:
   minPower: 0
   rockPrefab: {fileID: 0}
   maxAmmo: 0
+  isGrabbingCatapult: 0
+  rotatingCatpultSpeed: 0
 --- !u!114 &444080412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1896,6 +1898,8 @@ MonoBehaviour:
   minPower: 0
   rockPrefab: {fileID: 0}
   maxAmmo: 0
+  isGrabbingCatapult: 0
+  rotatingCatpultSpeed: 0
 --- !u!1001 &1056659777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4316,6 +4320,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6224624301768985281, guid: b6652180bee616946939a19a184bfe17,
+        type: 3}
+      propertyPath: gameOverPanel
+      value: 
+      objectReference: {fileID: 62140004}
+    - target: {fileID: 6177315126953621458, guid: b6652180bee616946939a19a184bfe17,
         type: 3}
       propertyPath: gameOverPanel
       value: 
