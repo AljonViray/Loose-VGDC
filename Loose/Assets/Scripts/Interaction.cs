@@ -79,8 +79,8 @@ public class Interaction : MonoBehaviour
             cam.transform.localPosition = localPos;
             cam.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
-            Debug.Log(this.gameObject);
-            Debug.Log(this.transform.childCount);
+            //Debug.Log(this.gameObject);
+            //Debug.Log(this.transform.childCount);
             if(this.transform.childCount > 0)
             {
                 activeCam = this.gameObject.transform.GetChild(0).gameObject;
@@ -175,13 +175,14 @@ public class Interaction : MonoBehaviour
                     
 
                 }
-                /*
+
                 if (Input.GetKeyUp(KeyCode.E))
                 {
                     hit.collider.gameObject.GetComponentInChildren<Animation>().Stop();
+                    audioSource.Stop();
                 }
-                */
-            
+
+
             }
 
             else if (lookingAtObject.CompareTag("StopBarRotate"))
@@ -248,7 +249,7 @@ public class Interaction : MonoBehaviour
         if (Physics.Raycast(activeCam.transform.position, activeCam.transform.TransformDirection(Vector3.forward), out hit, maxRange))
         {
             
-            Debug.DrawRay(activeCam.transform.position, activeCam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            //Debug.DrawRay(activeCam.transform.position, activeCam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             return hit.collider.gameObject;
         }
         else

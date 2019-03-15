@@ -19,7 +19,7 @@ public class StartSceneScript : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Shaun");
+        SceneManager.LoadScene("Level1");
     }
 
     public void QuitGame()
