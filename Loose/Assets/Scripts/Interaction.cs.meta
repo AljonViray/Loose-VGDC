@@ -4,10 +4,10 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - currentCarriedObject: {instanceID: 0}
-  - castleArea: {instanceID: 0}
   - rockPrefab: {fileID: 1290502255752060, guid: 108de31caf115e84ebfde6f09f3b3f23,
       type: 3}
+  - looseSound: {fileID: 8300000, guid: 59f6fef1b691e9a479c7624f71d76d8d, type: 3}
+  - reloadSound: {fileID: 8300000, guid: 42a1908e2eda92946808537f434f0deb, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
