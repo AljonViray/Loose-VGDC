@@ -39,7 +39,6 @@ public class Interaction : MonoBehaviour
         isGrabbingCatapult = false;
         currentCarriedObject = null;
         activeCam = this.gameObject.transform.GetChild(0).gameObject;
-
         audioSource = GameObject.Find("Audio Object").GetComponent<AudioSource>();
     }
 
@@ -134,18 +133,25 @@ public class Interaction : MonoBehaviour
                     }
                     audioSource.clip = looseSound;
                     audioSource.Play();
+
+                    foreach (Animation a in hit.collider.gameObject.GetComponentsInChildren<Animation>())
+                    {
+                        a.Play();
+                    }
                 }
+
             }
 
             else if (lookingAtObject.CompareTag("Reload"))
             {
-                Debug.Log(catapult.transform.GetChild(0).GetChild(0).transform.eulerAngles.x);
+                //Debug.Log(catapult.transform.GetChild(0).GetChild(0).transform.eulerAngles.x);
 
                 if (catapult.GetComponent<Catapult>().isArmed == false)
                 {
                     catapult.transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
+                    //Debug.Log(catapult.transform.GetChild(0).GetChild(0).gameObject + " " + catapult.transform.GetChild(0).GetChild(0).transform.localEulerAngles);
 
-                    if (Input.GetKeyDown(KeyCode.E))
+                    if (Input.GetKey(KeyCode.E))
                     {
                         //Rotate catapult arm
                         catapult.transform.GetChild(0).GetChild(0).transform.Rotate(110 - catapult.transform.GetChild(0).GetChild(0).transform.rotation.eulerAngles.x, 0, 0);
@@ -157,22 +163,80 @@ public class Interaction : MonoBehaviour
                         }
                         audioSource.clip = reloadSound;
                         audioSource.Play();
+
+                        if (firstPass)
+                        {
+                            if(catapult.transform.GetChild(0).GetChild(0).transform.localRotation.eulerAngles.x < firstFloat)
+                            {
+                                Debug.Log("TRUE < FIRST");
+                                catapult.transform.GetChild(0).GetChild(0).transform.Rotate(1, 0, 0);
+                                hit.collider.gameObject.GetComponentInChildren<Animation>().Play();
+                                Debug.Log(catapult.transform.GetChild(0).GetChild(0).transform.localRotation.eulerAngles.x);
+
+                            }
+                            else
+                            {
+                                Debug.Log("TRUE > FIRST");
+                                catapult.transform.GetChild(0).GetChild(0).transform.Rotate(1, 0, 0);
+                                Debug.Log(catapult.transform.GetChild(0).GetChild(0).transform.localRotation.eulerAngles.x);
+
+                                firstPass = false;
+                                //UnityEditor.EditorApplication.isPaused = true;
+                            }
+                            
+                        }
+                        else
+                        {
+                            if (catapult.transform.GetChild(0).GetChild(0).transform.localRotation.eulerAngles.x > secondFloat)
+                            {
+                                Debug.Log("FALSE > SECOND");
+                                catapult.transform.GetChild(0).GetChild(0).transform.Rotate(1, 0, 0);
+                                hit.collider.gameObject.GetComponentInChildren<Animation>().Play();
+
+                            }
+                            else
+                            {
+                                Debug.Log("TRUE < SECOND");
+                                catapult.GetComponent<Catapult>().Arm();
+                                catapult.transform.GetChild(0).GetChild(0).transform.localRotation = Quaternion.Euler(70, 180, 180);
+                                hit.collider.gameObject.GetComponentInChildren<Animation>().Stop();
+
+                                firstPass = true;
+                            }
+                        }
+
                     }
+
+                }
+                if (Input.GetKeyUp(KeyCode.E))
+                {
+                    hit.collider.gameObject.GetComponentInChildren<Animation>().Stop();
                 }
             }
 
             else if (lookingAtObject.CompareTag("StopBarRotate"))
             {
                 GameObject bar = GameObject.Find("StopBar").transform.GetChild(0).gameObject;
-                Debug.Log(bar.transform.rotation.x);
+                //Debug.Log(bar.transform.rotation.x);
 
                 if (Input.GetKey(KeyCode.E) && bar.transform.rotation.x <= maxAngle)
                 {
+
+                    lookingAtObject.GetComponentInChildren<Animator>().SetBool("Forward", false);
+                    lookingAtObject.gameObject.GetComponentInChildren<Animator>().SetBool("Backward", true);
                     bar.transform.Rotate(.5f, 0, 0);
                 }
                 else if (Input.GetKey(KeyCode.Q) && bar.transform.rotation.x >= minAngle)
                 {
+                    lookingAtObject.gameObject.GetComponentInChildren<Animator>().SetBool("Backward", false);
+                    lookingAtObject.gameObject.GetComponentInChildren<Animator>().SetBool("Forward", true);
+
                     bar.transform.Rotate(-.5f, 0, 0);
+                }
+                else
+                {
+                    lookingAtObject.gameObject.GetComponentInChildren<Animator>().SetBool("Forward", false);
+                    lookingAtObject.gameObject.GetComponentInChildren<Animator>().SetBool("Backward", false);
                 }
             }
 

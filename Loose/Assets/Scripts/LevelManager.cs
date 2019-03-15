@@ -18,15 +18,9 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        score = 0;
-        enemiesToSpawn = 5;
-        enemiesSpawned = 0;
-        spawnTimer = 10.0f;
-        timeSinceSpawn = 0.0f;
         scoreText = canvasScoreTextObj.GetComponent<Text>();
-        scoreText.text = "Score: 0";
+        ResetValues();
     }
-
 
     void Update()
     {
@@ -40,6 +34,16 @@ public class LevelManager : MonoBehaviour
         {
             ResetRound();
         }
+    }
+
+    public void ResetValues()
+    {
+        score = 0;
+        enemiesToSpawn = 5;
+        enemiesSpawned = 0;
+        spawnTimer = 10.0f;
+        timeSinceSpawn = 0.0f;
+        scoreText.text = "Score: 0";
     }
 
     public void IncreaseScore()
