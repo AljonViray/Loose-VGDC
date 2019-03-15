@@ -25,8 +25,11 @@ public class Interaction : MonoBehaviour
     public int maxAmmo;
 
     public bool isGrabbingCatapult;
-
     public float rotatingCatpultSpeed;
+
+    private AudioSource audioSource;
+    public AudioClip looseSound;
+    public AudioClip reloadSound;
 
 
 
@@ -36,6 +39,8 @@ public class Interaction : MonoBehaviour
         isGrabbingCatapult = false;
         currentCarriedObject = null;
         activeCam = this.gameObject.transform.GetChild(0).gameObject;
+
+        audioSource = GameObject.Find("Audio Object").GetComponent<AudioSource>();
     }
 
 
@@ -88,9 +93,10 @@ public class Interaction : MonoBehaviour
             {
                 currentCarriedObject = lookingAtObject;
                 currentCarriedObject.GetComponent<Rigidbody>().isKinematic = true;
-                currentCarriedObject.transform.SetParent(this.gameObject.transform);
+                currentCarriedObject.transform.SetParent(this.gameObject.transform.GetChild(0));
             }
 
+            //Sets ammo on fire
             else if (lookingAtObject.tag == "Ammo" && Input.GetKeyDown(KeyCode.F))
             {
                 lookingAtObject.transform.GetChild(0).gameObject.SetActive(!lookingAtObject.transform.GetChild(0).gameObject.activeSelf);
@@ -103,7 +109,17 @@ public class Interaction : MonoBehaviour
                 currentCarriedObject = null;
             }
 
-         /////////////////////////////////////////////////////////////////
+            else if (currentCarriedObject != null && Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                //Throw object instead of dropping
+                currentCarriedObject.transform.parent = null;
+                currentCarriedObject.GetComponent<Rigidbody>().isKinematic = false;
+                Vector3 force = new Vector3(500, 250, 0);
+                currentCarriedObject.GetComponent<Rigidbody>().AddForce(force);
+                currentCarriedObject = null;
+            }
+
+            /////////////////////////////////////////////////////////////////
 
             //Interacting with buttons, etc.
             if (lookingAtObject.CompareTag("Loose"))
@@ -111,6 +127,13 @@ public class Interaction : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     catapult.GetComponent<Catapult>().Loose();
+
+                    if (audioSource.isPlaying == true)
+                    {
+                        audioSource.Stop();
+                    }
+                    audioSource.clip = looseSound;
+                    audioSource.Play();
                 }
             }
 
@@ -127,6 +150,13 @@ public class Interaction : MonoBehaviour
                         //Rotate catapult arm
                         catapult.transform.GetChild(0).GetChild(0).transform.Rotate(110 - catapult.transform.GetChild(0).GetChild(0).transform.rotation.eulerAngles.x, 0, 0);
                         catapult.GetComponent<Catapult>().Arm();
+
+                        if (audioSource.isPlaying == true)
+                        {
+                            audioSource.Stop();
+                        }
+                        audioSource.clip = reloadSound;
+                        audioSource.Play();
                     }
                 }
             }
